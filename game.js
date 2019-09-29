@@ -49,6 +49,7 @@ class Game {
 			screen.fillStyle = '#333333';
 		}
 		screen.fillRect(square.x, square.y, 36, 36);
+		screen.strokeRect(square.x, square.y, 36, 36);
 	}
 
 	draw(screen, size) {
@@ -87,14 +88,13 @@ class Square {
 			}
 			screen.fillRect(this.square.x, this.square.y, squareSize.width, squareSize.height);
 		}
-		// screen.fillRect(this.square.x, this.square.y, squareSize.width, squareSize.height);
 	}
 }
 
 class Doody {
-	constructor(game, doodyLocation, doodySize) {
+	constructor(game, doodySize) {
 		this.game = game;
-		this.doodyLocation = doodyLocation;
+		this.doodyLocation = squares[0];
 		this.doodySize = doodySize;
 		this.jumping = false;
 	}
