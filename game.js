@@ -1,9 +1,3 @@
-const colors = {
-	z1    : '#BBBBBB',
-	z2    : '#333333',
-	doody : 'rgb(92, 64, 27)'
-};
-
 class Game {
 	constructor(canvasId) {
 		let canvas = document.getElementById(canvasId);
@@ -12,21 +6,15 @@ class Game {
 		this.keyboard = new Keyboarder();
 		this.levelComplete = false;
 		this.gameOver = false;
-		this.squares = squares;
-
-		let doodySize = {
-			width  : 36,
-			height : 36
-		};
-
-		let doodyLocation = squares[0].location;
-
-		// let squareLocation = squares[0].location;
+		this.squares = [];
+		for (let square of squares) {
+			square = new Square(this, square.x, square.y, square.z);
+			this.squares.push(square);
+		}
 	}
 
 	begin() {
-		let doody = new Doody(this, this.size);
-
+		this.doody = new Doody(this, this.size);
 		let tick = () => {
 			this.update();
 			this.draw(this.screen, this.size);
@@ -75,28 +63,19 @@ class Square {
 	}
 
 	update(game) {
-		console.log('update function Square');
-	}
-
-	draw(screen) {
-		for (let square of this.squares) {
-			if (this.square.z === 1) {
-				screen.fillStyle = colors.z1;
-			}
-			if (this.square.z === 2) {
-				screen.fillStyle = colors.z2;
-			}
-			screen.fillRect(this.square.x, this.square.y, squareSize.width, squareSize.height);
+		if (square.z === 0) {
+			square.remove();
 		}
 	}
 }
 
 class Doody {
-	constructor(game, doodySize) {
+	constructor(game, size) {
 		this.game = game;
-		this.doodyLocation = squares[0];
-		this.doodySize = doodySize;
+		// this.doodyLocation = {square.x, square.y;
+		this.size = { x: 36, y: 36 };
 		this.jumping = false;
+		this.keyboarder = new Keyboarder();
 	}
 
 	update(game) {
@@ -119,8 +98,7 @@ class Doody {
 	}
 
 	draw(screen) {
-		screen.fillStyle = colors.doody;
-		screen.fillRect();
+		screen.drawImage('fullDoody.png', 331, 303);
 	}
 }
 
