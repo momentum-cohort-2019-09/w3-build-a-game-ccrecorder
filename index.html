@@ -4,10 +4,75 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <script src="keyboarder.js"></script>
+  <title>Call of Doody</title>
+  <link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="doodyFavicon.png">
+  <!-- <script src="keyboarder.js"></script> -->
+  <script src="level1.js"></script>
+  <script src="game.js"></script>
+  <style>
+    *,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+    
+    body {
+      font-family: sans-serif;
+      background-color: #DEDEDE;
+      
+    }
+    .game-container {
+      background: linear-gradient(rgba(240, 141, 52, 0), rgba(240, 141, 52, 0)),
+		no-repeat center/cover url(background.jpg);
+      width: 590px;      
+      margin: 2rem auto;
+      border: thick double #5c401b;
+    }
+  .intro {
+	position: relative;
+	display: inline-block;
+	background: #DEDEDE;
+	Color: rgb(92, 64, 27);
+	padding: 10px;
+	border-radius: 3px;
+	font-size: 7vw;
+	text-shadow: 2px 2px #000000;
+}
+.intro::before {
+	content: '';
+	height: 100%;
+	display: block;
+	position: absolute;
+	width: 100vw;
+	right: 50%;
+	top: 0;
+	transform: translateX(-50%);
+	z-index: -1;
+}
+
+.intro::after {
+	content: '';
+	height: 100%;
+	display: block;
+	background: linear-gradient(rgba(92, 64, 27, 0.9), rgba(92, 64, 27, 0.5)),
+		no-repeat center/cover;
+	position: absolute;
+	width: 100vw;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: -2;
+}
+  </style>
 </head>
 <body>
-  
+  <h1 class="intro" style="font-family: 'Mansalva', cursive">Call of Doody</h1>
+  <div class="game-container">
+  <canvas id="game-canvas" width="590" height="390"></canvas>
+  </div>
 </body>
 </html>
