@@ -31,13 +31,13 @@ class Game {
 			this.update();
 			this.draw(this.screen, this.size);
 			requestAnimationFrame(tick);
-			this.createSquare();
+			// this.createSquare();
 		};
 		tick();
 	}
 
 	update() {
-		console.log('update method');
+		// console.log('update method');
 		// if (make line about missing a square) this.gameOver = true
 	}
 
