@@ -14,10 +14,6 @@ class Game {
 		this.gameOver = false;
 		this.squares = squares;
 
-		let squareSize = {
-			width  : 36,
-			height : 36
-		};
 		let doodySize = {
 			width  : 36,
 			height : 36
@@ -25,7 +21,7 @@ class Game {
 
 		let doodyLocation = squares[0].location;
 
-		let squareLocation = squares[0].location;
+		// let squareLocation = squares[0].location;
 	}
 
 	begin() {
@@ -45,7 +41,22 @@ class Game {
 		// if (make line about missing a square) this.gameOver = true
 	}
 
-	draw() {}
+	render(screen, square) {
+		if (square.z === 1) {
+			screen.fillStyle = '#FFFFFF';
+		}
+		if (square.z === 2) {
+			screen.fillStyle = '#333333';
+		}
+		screen.fillRect(square.x, square.y, 36, 36);
+	}
+
+	draw(screen, size) {
+		screen.clearRect(0, 0, size.width, size.height);
+		for (let square of this.squares) {
+			this.render(screen, square);
+		}
+	}
 
 	createSquare() {
 		for (let square of this.squares) {
