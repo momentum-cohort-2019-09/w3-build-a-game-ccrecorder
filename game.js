@@ -6,7 +6,7 @@ const colors = {
 
 class Game {
 	constructor(canvasId) {
-		const canvas = document.getElementById(canvasId);
+		let canvas = document.getElementById(canvasId);
 		this.screen = canvas.getContext('2d');
 		this.size = { width: canvas.width, height: canvas.height };
 		this.keyboard = new Keyboarder();
@@ -23,49 +23,49 @@ class Game {
 			height : 36
 		};
 
-		let doodyLocation = square[0].location;
+		let doodyLocation = squares[0].location;
 
-		this.doody = new Doody(doodyLocation, doodySize);
-
-		this.square = new Square(squareLocation, squareSize);
+		let squareLocation = squares[0].location;
 	}
 
-	run() {
-		const tick = () => {
+	begin() {
+		let doody = new Doody(this, this.size);
+
+		let tick = () => {
+			console.log(screen);
 			this.update();
-			this.draw();
-
-			if (!this.gameOver) {
-				window.requestAnimationFrame(tick);
-			}
+			this.draw(this.screen, this.size);
+			requestAnimationFrame(tick);
+			this.createSquare();
 		};
-
 		tick();
 	}
 
 	udpate() {
-		for (let square of this.squares) {
-			square.update(this);
-			// if (make line about missing a square) this.gameOver = true
-		}
+		console.log('update method');
+		// if (make line about missing a square) this.gameOver = true
 	}
 
-	draw() {
+	draw() {}
+
+	createSquare() {
 		for (let square of this.squares) {
 			square.draw(this.screen);
 		}
 	}
-	createSquare(x, y, z) {}
 }
 
 class Square {
-	constructor(x, y, z) {
+	constructor(game, x, y, z) {
+		this.game = game;
 		this.x = x;
 		this.y = y;
 		this.z = z;
 	}
 
-	update(game) {}
+	update(game) {
+		console.log('update function Square');
+	}
 
 	draw(screen) {
 		for (let square of this.squares) {
@@ -82,7 +82,8 @@ class Square {
 }
 
 class Doody {
-	constructor(doodyLocation, doodySize) {
+	constructor(game, doodyLocation, doodySize) {
+		this.game = game;
 		this.doodyLocation = doodyLocation;
 		this.doodySize = doodySize;
 		this.jumping = false;
@@ -147,5 +148,7 @@ class Keyboarder {
 
 Keyboarder.KEYS = { LEFT: 37, RIGHT: 39, UP: 38, DOWN: 40, S: 83 };
 
-const game = new Game('game-canvas');
-game.run();
+window.addEventListener('load', function() {
+	let game = new Game('game-canvas');
+	game.begin();
+});
