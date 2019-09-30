@@ -14,7 +14,8 @@ class Game {
 	}
 
 	begin() {
-		this.doody = new Doody(this, this.size);
+		let doody = new Doody(this, this.size);
+		this.squares.push(doody);
 		let tick = () => {
 			this.update();
 			this.draw(this.screen, this.size);
@@ -72,7 +73,7 @@ class Square {
 class Doody {
 	constructor(game, size) {
 		this.game = game;
-		// this.doodyLocation = {square.x, square.y;
+		// this.doodyLocation = {square.x, square.y};
 		this.size = { x: 36, y: 36 };
 		this.jumping = false;
 		this.keyboarder = new Keyboarder();
