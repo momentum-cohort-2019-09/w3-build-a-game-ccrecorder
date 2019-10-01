@@ -44,7 +44,11 @@ class Game {
 		tick();
 	}
 
-	update() {}
+	update() {
+		for (let body of this.bodies) {
+			body.update(this);
+		}
+	}
 
 	draw() {
 		// screen.clearRect(0, 0, this.size.width, this.size.height);
@@ -62,19 +66,15 @@ class Doody {
 
 	update(game) {
 		if (game.keyboard.isDown(Keyboarder.KEYS.RIGHT)) {
-			this.jumping = true;
 			this.location.x += 36;
 		}
 		if (game.keyboard.isDown(Keyboarder.KEYS.LEFT)) {
-			this.jumping = true;
 			this.location.x -= 36;
 		}
 		if (game.keyboard.isDown(Keyboarder.KEYS.UP)) {
-			this.jumping = true;
 			this.location.y -= 36;
 		}
 		if (game.keyboard.isDown(Keyboarder.KEYS.DOWN)) {
-			this.jumping = true;
 			this.location.y += 36;
 		}
 	}
@@ -95,9 +95,7 @@ class Square {
 		this.z = z;
 	}
 
-	update() {
-		console.log(bodies);
-	}
+	update() {}
 
 	draw(screen) {
 		if (this.z === 1) {
