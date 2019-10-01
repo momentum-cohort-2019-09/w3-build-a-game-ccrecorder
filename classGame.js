@@ -51,6 +51,7 @@ class Game {
 	}
 
 	draw() {
+		// screen.clearRect(0, 0, canvas.width, canvas.height);
 		// screen.clearRect(0, 0, this.size.width, this.size.height);
 		for (let body of this.bodies) {
 			body.draw(this.screen);
@@ -65,21 +66,23 @@ class Doody {
 	}
 
 	update(game) {
-		if (game.keyboard.isDown(Keyboarder.KEYS.RIGHT)) {
+		// screen.clearRect(0, 0, size.width, size.height);
+		if (game.keyboard.on(Keyboarder.KEYS.RIGHT)) {
 			this.location.x += 36;
 		}
-		if (game.keyboard.isDown(Keyboarder.KEYS.LEFT)) {
+		if (game.keyboard.on(Keyboarder.KEYS.LEFT)) {
 			this.location.x -= 36;
 		}
-		if (game.keyboard.isDown(Keyboarder.KEYS.UP)) {
+		if (game.keyboard.on(Keyboarder.KEYS.UP)) {
 			this.location.y -= 36;
 		}
-		if (game.keyboard.isDown(Keyboarder.KEYS.DOWN)) {
+		if (game.keyboard.on(Keyboarder.KEYS.DOWN)) {
 			this.location.y += 36;
 		}
 	}
 
 	draw(screen) {
+		// screen.clearRect(0, 0, canvas.width, canvas.height);
 		// screen.fillStyle = '#3D2D17';
 		// screen.fillRect(331, 339, 36, 36);
 		// screen.strokeRect(331, 339, 36, 36);
@@ -95,14 +98,23 @@ class Square {
 		this.z = z;
 	}
 
-	update() {}
+	update() {
+		if (this.z === 0) {
+			game.bodies.remove(this);
+		}
+	}
 
 	draw(screen) {
+		// screen.clearRect(0, 0, canvas.width, canvas.height);
 		if (this.z === 1) {
 			screen.fillStyle = '#FFFFFF';
 		}
 		if (this.z === 2) {
 			screen.fillStyle = '#333333';
+		}
+		if (this.z === 3) {
+			const toilet = document.getElementById('toilet');
+			screen.drawImage(toilet, this.x, this.y, 36, 36);
 		}
 		screen.fillRect(this.x, this.y, 36, 36);
 		screen.strokeRect(this.x, this.y, 36, 36);
