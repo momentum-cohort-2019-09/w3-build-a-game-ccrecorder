@@ -7,6 +7,7 @@ class Game {
 		this.levelComplete = false;
 		this.gameOver = false;
 		this.squares = [];
+
 		for (let square of squares) {
 			square = new Square(this, square.x, square.y, square.z);
 			this.squares.push(square);
@@ -14,8 +15,9 @@ class Game {
 	}
 
 	begin() {
-		let doody = new Doody(this, this.size);
+		let doody = new Doody(this);
 		this.squares.push(doody);
+		// console.log(squares);
 		let tick = () => {
 			this.update();
 			this.draw(this.screen, this.size);
@@ -46,6 +48,7 @@ class Game {
 		for (let square of this.squares) {
 			this.render(screen, square);
 		}
+		screen.drawImage(image, 331, 303, 36, 36);
 	}
 
 	createSquare() {
@@ -71,12 +74,14 @@ class Square {
 }
 
 class Doody {
-	constructor(game, size) {
+	constructor(game) {
 		this.game = game;
 		// this.doodyLocation = {square.x, square.y};
-		this.size = { x: 36, y: 36 };
 		this.jumping = false;
 		this.keyboarder = new Keyboarder();
+		let image = new Image();
+		image.src = './fullDoody.png';
+		// screen.drawImage(image, 331, 267, 36, 36);
 	}
 
 	update(game) {
@@ -99,7 +104,7 @@ class Doody {
 	}
 
 	draw(screen) {
-		screen.drawImage('fullDoody.png', 331, 303);
+		screen.drawImage('image', 331, 267, 36, 36);
 	}
 }
 
